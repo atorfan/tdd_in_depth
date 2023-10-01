@@ -4,6 +4,11 @@ plugins {
     id 'idea'
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
 
 sourceSets {
     test {
@@ -20,7 +25,10 @@ dependencies {
               platform('org.junit:junit-bom:5.7.2'),
               'org.junit.jupiter:junit-jupiter',
               'org.assertj:assertj-core:3.19.0',
-              'org.mockito:mockito-junit-jupiter:3.3.3'
+              'org.mockito:mockito-junit-jupiter:3.3.3',
+              'io.cucumber:cucumber-java:7.14.0',
+              'io.cucumber:cucumber-junit:7.14.0',
+              'io.cucumber:cucumber-junit-platform-engine:7.14.0'
     )
 }
 
@@ -33,5 +41,22 @@ test {
 
     reports {
         html.enabled = true
+    }
+}
+
+tasks.register('cucumber') {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:target/cucumber',
+                    //'--plugin', 'json:target/cucumber/cucumber.json',
+                    '--glue', 'com.codurance.atm',
+                    'src/test/resources/feature'
+            ]
+        }
     }
 }
