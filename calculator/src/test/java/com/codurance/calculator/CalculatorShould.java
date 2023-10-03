@@ -25,6 +25,7 @@ public class CalculatorShould {
     @CsvSource({
             "2,3,6",
             "3,2,6",
+            "4,2,8",
             "6,9,54"
     })
     public void multiplyTwoIntegers(int a, int b, int mult) {
