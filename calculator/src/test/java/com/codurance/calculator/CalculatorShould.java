@@ -9,12 +9,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorShould {
 
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
+
     @Test
     void substractOneNumberToAnother() {
-        Calculator calculator = new Calculator();
+        assertEquals(calculator.subtract(3, 2), 1);
+    }
 
-        int result = calculator.subtract(3, 2);
-
-        assertEquals(result, 1);
+    @ParameterizedTest
+    @CsvSource({
+            "2,3,6",
+            "6,9,54"
+    })
+    public void multiplyTwoIntegers(int a, int b, int mult) {
+        assertEquals(mult, calculator.multiply(a, b));
     }
 }
