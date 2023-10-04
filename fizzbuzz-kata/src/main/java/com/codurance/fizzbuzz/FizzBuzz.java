@@ -5,7 +5,7 @@ package com.codurance.fizzbuzz;
 
 public class FizzBuzz {
 
-    public String convert(int i) {
-        throw new UnsupportedOperationException("implement me!");
+    public String convert(int number) {
+        return "1";
     }
 }
