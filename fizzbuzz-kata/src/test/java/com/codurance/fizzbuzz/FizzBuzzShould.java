@@ -12,14 +12,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FizzBuzzShould {
 
     @ParameterizedTest
-    @CsvSource({"1,1", "2,2", "4,4"})
+    @CsvSource({"1,1", "2,2", "4,4", "7,7", "8,8", "11,11", "13,13", "14,14"})
     void convert_number_to_FizzBuzz_string(int input, String expectedOutput) {
         assertEquals(expectedOutput, new FizzBuzz().convert(input));
     }
 
     @ParameterizedTest
-    @CsvSource({"3", "6", "9"})
+    @CsvSource({"3", "6", "9", "12"})
     void convert_multiples_of_3_to_Fizz(int input) {
         assertEquals("Fizz", new FizzBuzz().convert(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"5", "10"})
+    void convert_multiples_of_5_to_Buzz() {
+        assertEquals("Buzz", new FizzBuzz().convert(5));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"15"})
+    void convert_to_FizzBuzz() {
+        assertEquals("FizzBuzz", new FizzBuzz().convert(15));
     }
 }
