@@ -2,14 +2,18 @@ package com.codurance.atm.account;
 
 public class AccountNumber {
 
-    private final String accountNumberString;
+    private final int accountNumber;
 
     private AccountNumber(String accountNumberString) {
-        this.accountNumberString = accountNumberString;
+        this.accountNumber = Integer.parseInt(accountNumberString);
+    }
+
+    public AccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String value() {
-        return accountNumberString;
+        return String.valueOf(accountNumber);
     }
 
     public static AccountNumber fromString(String accountNumberString) {

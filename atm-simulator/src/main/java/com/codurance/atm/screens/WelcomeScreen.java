@@ -47,7 +47,7 @@ public class WelcomeScreen implements Screen {
 
     private Account findAccount(AccountNumber accountNumber, String pin) {
         try {
-            return accountService.findBy(accountNumber.value(), pin);
+            return accountService.findBy(accountNumber, pin);
         } catch (InvalidAccountPin e) {
             cliPrompt.promptGenericMessage("Invalid Account Number/PIN\n");
         }
