@@ -1,0 +1,17 @@
+Testing Strategy
+
+ Unit Tests
+====================
+The happy path (account number and PIN valid) making a withdrawal
+The happy path (account number and PIN valid) making a fund transfer
+Account number not valid (because that logic is under screens module)
+PIN not valid (because that logic is under screens module)
+
+ Acceptance Tests
+====================
+I would choose AtmSimulator as a Subject Under Test testing "user journey" from entering the account number and PIN to
+the withdrawal operation
+
+ Integration Tests
+====================
+CliPrompt with real collaborators (an InputStream and the ConsolePrinter)
