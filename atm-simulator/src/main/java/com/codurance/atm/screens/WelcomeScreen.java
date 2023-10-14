@@ -1,8 +1,6 @@
 package com.codurance.atm.screens;
 
-import com.codurance.atm.account.Account;
-import com.codurance.atm.account.InvalidAccountPin;
-import com.codurance.atm.account.AccountService;
+import com.codurance.atm.account.*;
 import com.codurance.atm.infrastructure.CliPrompt;
 
 public class WelcomeScreen implements Screen {
@@ -10,7 +8,7 @@ public class WelcomeScreen implements Screen {
     private final AccountService accountService;
 
     private String pin;
-    private String accountNumber;
+    private AccountNumber accountNumber;
 
     public WelcomeScreen(CliPrompt cliPrompt, AccountService accountService) {
         this.cliPrompt = cliPrompt;
@@ -28,22 +26,13 @@ public class WelcomeScreen implements Screen {
     }
 
     private Account askAccountNumber() {
-        do{
-            accountNumber = cliPrompt.accountNumber();
-        } while (isInvalid(accountNumber));
+        try {
+            accountNumber = AccountNumber.fromString(cliPrompt.accountNumber());
+        } catch (InvalidAccountNumber invalidAccountNumber) {
+            cliPrompt.promptGenericMessage(invalidAccountNumber.getMessage() + "\n");
+            return askAccountNumber();
+        }
         return askPin();
-    }
-
-    private boolean isInvalid(String accountNumber) {
-        if(!accountNumber.matches("\\d+")){
-            cliPrompt.promptGenericMessage("Account Number should only contain numbers\n");
-            return true;
-        }
-        if (accountNumber.length() != 6) {
-            cliPrompt.promptGenericMessage("Account Number should have 6 digits length\n");
-            return true;
-        }
-        return false;
     }
 
     private Account askPin() {
@@ -56,9 +45,9 @@ public class WelcomeScreen implements Screen {
         return account;
     }
 
-    private Account findAccount(String accountNumber, String pin) {
+    private Account findAccount(AccountNumber accountNumber, String pin) {
         try {
-            return accountService.findBy(accountNumber, pin);
+            return accountService.findBy(accountNumber.value(), pin);
         } catch (InvalidAccountPin e) {
             cliPrompt.promptGenericMessage("Invalid Account Number/PIN\n");
         }

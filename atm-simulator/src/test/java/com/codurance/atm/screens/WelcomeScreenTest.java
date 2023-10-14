@@ -40,6 +40,7 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).accountNumber();
+        verify(cliPrompt, times(1)).promptGenericMessage("Account Number should only contain numbers\n");
     }
 
     @Test
@@ -50,6 +51,7 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).accountNumber();
+        verify(cliPrompt, times(1)).promptGenericMessage("Account Number should have 6 digits length\n");
     }
 
     @Test
@@ -60,6 +62,7 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).accountNumber();
+        verify(cliPrompt, times(1)).promptGenericMessage("Account Number should have 6 digits length\n");
     }
 
     @Test
@@ -70,6 +73,7 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).pin();
+        verify(cliPrompt, times(1)).promptGenericMessage("PIN should only contain numbers\n");
     }
 
     @Test
@@ -80,6 +84,7 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).pin();
+        verify(cliPrompt, times(1)).promptGenericMessage("PIN should have 6 digits length\n");
     }
 
     @Test
@@ -90,5 +95,6 @@ class WelcomeScreenTest {
         welcomeScreen.show();
 
         verify(cliPrompt, times(2)).pin();
+        verify(cliPrompt, times(1)).promptGenericMessage("PIN should have 6 digits length\n");
     }
 }
