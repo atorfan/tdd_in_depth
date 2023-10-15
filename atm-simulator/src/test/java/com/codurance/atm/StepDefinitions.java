@@ -1,6 +1,7 @@
 package com.codurance.atm;
 
 import com.codurance.atm.account.Account;
+import com.codurance.atm.account.AccountBalance;
 import com.codurance.atm.account.AccountNumber;
 import com.codurance.atm.account.AccountService;
 import com.codurance.atm.infrastructure.CliPrompt;
@@ -30,7 +31,7 @@ public class StepDefinitions {
 
     @Given("there's an Account with number {int}, PIN {int} and balance {int}")
     public void givenExistingAccountNumberAndPinWithBalance(int accountNumber, int pin, int balance) {
-        Account validAccount = new Account(new AccountNumber(accountNumber), balance);
+        Account validAccount = new Account(new AccountNumber(accountNumber), new AccountBalance(balance));
         given(accountService.findBy(new AccountNumber(accountNumber), toString(pin))).willReturn(validAccount);
     }
 
