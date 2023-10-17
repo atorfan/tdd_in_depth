@@ -51,7 +51,7 @@ public class StepDefinitions {
         verify(cliPrompt).promptGenericMessage(String.format("Your current balance is %d", expectedBalance));
     }
 
-    private String toString(int accountNumber) {
-        return String.valueOf(accountNumber);
+    private String toString(int intValue) {
+        return String.valueOf(intValue);
     }
 }

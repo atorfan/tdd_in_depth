@@ -1,5 +1,7 @@
 package com.codurance.atm.account;
 
+import java.util.Objects;
+
 public class AccountNumber {
 
     private final int accountNumber;
@@ -32,5 +34,18 @@ public class AccountNumber {
 
     private static boolean notValidLength(String accountNumber) {
         return accountNumber.length() != 6;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountNumber that = (AccountNumber) o;
+        return accountNumber == that.accountNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNumber);
     }
 }
