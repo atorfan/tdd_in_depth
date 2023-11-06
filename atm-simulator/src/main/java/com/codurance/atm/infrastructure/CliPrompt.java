@@ -29,9 +29,14 @@ public class CliPrompt {
         return scanner.next();
     }
 
-    public String transactionScreenMenu(String accountNumber, String balance) {
+    public Integer transactionScreenMenu(String accountNumber, String balance) {
         printer.prompt(MessageFormat.format(HOME_SCREEN_MENU, accountNumber, balance));
-        return scanner.next();
+        return Integer.parseInt(scanner.next());
+    }
+
+    public Integer withdrawQuantity() {
+        printer.prompt("How much money do you want to withdraw? ");
+        return Integer.parseInt(scanner.next());
     }
 
     public void promptGenericMessage(String anyMessage) {

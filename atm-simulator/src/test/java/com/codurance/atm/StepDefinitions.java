@@ -21,6 +21,7 @@ public class StepDefinitions {
     private AccountService accountService;
     private CliPrompt cliPrompt;
     private AtmSimulator atmSimulator;
+    private Account validAccount;
 
     @Before
     public void beforeScenario() {
@@ -31,7 +32,7 @@ public class StepDefinitions {
 
     @Given("there's an Account with number {int}, PIN {int} and balance {int}")
     public void givenExistingAccountNumberAndPinWithBalance(int accountNumber, int pin, int balance) {
-        Account validAccount = new Account(new AccountNumber(accountNumber), new AccountBalance(balance));
+        validAccount = new Account(new AccountNumber(accountNumber), new AccountBalance(balance));
         given(accountService.findBy(new AccountNumber(accountNumber), toString(pin))).willReturn(validAccount);
     }
 
@@ -42,7 +43,9 @@ public class StepDefinitions {
     }
 
     @When("I withdraw {int}")
-    public void whenIWithdraw(int ignoredWithdraw) {
+    public void whenIWithdraw(int withdraw) {
+        given(cliPrompt.transactionScreenMenu(validAccount.accountNumber(), validAccount.balance())).willReturn(1);
+        given(cliPrompt.withdrawQuantity()).willReturn(withdraw);
         atmSimulator.showScreen();
     }
 

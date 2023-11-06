@@ -1,7 +1,7 @@
 package com.codurance.atm.account;
 
 public class Account {
-    private final AccountBalance accountBalance;
+    private AccountBalance accountBalance;
     private final AccountNumber accountNumber;
 
     public Account(AccountNumber accountNumber, AccountBalance accountBalance) {
@@ -15,5 +15,9 @@ public class Account {
 
     public String balance() {
         return accountBalance.toString();
+    }
+
+    public void withdraw(Integer quantityToWithdraw) {
+        accountBalance = accountBalance.substract(quantityToWithdraw);
     }
 }

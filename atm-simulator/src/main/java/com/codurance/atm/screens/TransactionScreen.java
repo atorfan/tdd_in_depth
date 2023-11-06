@@ -14,8 +14,11 @@ public class TransactionScreen implements Screen {
 
     @Override
     public Screen show() {
-        cliPrompt.transactionScreenMenu(account.accountNumber(), account.balance());
-        return new WithdrawScreen();
+        Integer choosedMenuOption = cliPrompt.transactionScreenMenu(account.accountNumber(), account.balance());
+        if (1 == choosedMenuOption) {
+            return new WithdrawScreen(this.cliPrompt, this.account);
+        }
+        return null;
     }
 
     @Override
