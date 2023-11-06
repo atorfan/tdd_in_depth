@@ -20,4 +20,8 @@ public class Account {
     public void withdraw(Integer quantityToWithdraw) {
         accountBalance = accountBalance.substract(quantityToWithdraw);
     }
+
+    public void deposit(Integer quantityToDeposit) {
+        accountBalance = accountBalance.plus(quantityToDeposit);
+    }
 }

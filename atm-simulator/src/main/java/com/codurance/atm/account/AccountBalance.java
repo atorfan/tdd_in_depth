@@ -10,6 +10,10 @@ public record AccountBalance(int balance) {
         return new AccountBalance(this.balance - quantityToWithdraw);
     }
 
+    public AccountBalance plus(Integer quantityToDeposit) {
+        return new AccountBalance(this.balance + quantityToDeposit);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(balance);

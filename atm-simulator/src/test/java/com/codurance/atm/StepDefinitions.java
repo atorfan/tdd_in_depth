@@ -49,6 +49,13 @@ public class StepDefinitions {
         atmSimulator.showScreen();
     }
 
+    @When("I deposit {int}")
+    public void whenIDeposit(int deposit) {
+        given(cliPrompt.transactionScreenMenu(validAccount.accountNumber(), validAccount.balance())).willReturn(2);
+        given(cliPrompt.depositQuantity()).willReturn(deposit);
+        atmSimulator.showScreen();
+    }
+
     @Then("I should see the message \"Your current balance is {int}\".")
     public void shouldSeeTheMessageWithExpectedBalance(int expectedBalance) {
         verify(cliPrompt).promptGenericMessage(String.format("Your current balance is %d", expectedBalance));
